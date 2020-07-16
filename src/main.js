@@ -1,6 +1,7 @@
 // Create game config object
+"use strict"
 let config = {
-    type: Phaser.Canvas,
+    type: Phaser.AUTO,
     width: 640,
     height: 480,
     scene: [ Menu, Play ],
@@ -8,6 +9,9 @@ let config = {
 
 // create main game object
 let game = new Phaser.Game(config);
+
+// reserve some keyboard bindings
+let keyENTER, keyLEFT, keyRIGHT, keyUP, keyDOWN;
 
 // define game settings
 game.settings = {
