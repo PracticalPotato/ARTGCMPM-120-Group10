@@ -2,8 +2,8 @@
 "use strict"
 let config = {
     type: Phaser.AUTO,
-    width: 1080,
-    height: 720,
+    width: 480,
+    height: 640,
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
