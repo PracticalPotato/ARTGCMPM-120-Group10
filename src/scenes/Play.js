@@ -13,7 +13,7 @@ class Play extends Phaser.Scene{
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
-        // add rocket (p1)
+        // add astronaut (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0).setOrigin(0, 0);
 
         // setup asteroid group
@@ -23,6 +23,20 @@ class Play extends Phaser.Scene{
 
         // start asteroid spawn loop
         this.asteroidSpawn();
+
+        // game over flag
+        this.gameOver = false;
+
+        // collision
+        this.physics.add.overlap(this.p1Astronaut, this.asteroidGroup, 
+            this.death, null, this);
+    }
+
+    // astronaut death
+    death(){
+        this.gameOver = true;
+        this.p1Astronaut.destroy();
+        this.scene.start('gameOverScene');
     }
 
     // asteroid spawn loop
@@ -37,7 +51,9 @@ class Play extends Phaser.Scene{
 
     update() {
 
-        this.p1Astronaut.update();
+        if(!this.gameOver){
+            this.p1Astronaut.update();
+        }
 
     }
     

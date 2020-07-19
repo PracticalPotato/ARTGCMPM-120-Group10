@@ -1,7 +1,8 @@
 // Asteroid prefab
 class Asteroid extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, velocity){
-        super(scene, Phaser.Math.Between(0, game.config.width), -100, 'asteroid', 0);
+        super(scene, Phaser.Math.Between(0, game.config.width), -100, 
+        'asteroid' + Phaser.Math.Between(1, 3), 0);
 
         // add object to existing scene
         scene.add.existing(this);
