@@ -1,4 +1,4 @@
-// Rocket prefab
+// Astronaut prefab
 class Astronaut extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
@@ -19,12 +19,13 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         scene.add.existing(this);
         scene.physics.add.existing(this);
         
-        // config the object
+        // config the physics
+        this.setImmovable();
         this.setCollideWorldBounds(true);
         this.setBounce(.5, .5);
         this.setDamping(true);
         this.setDrag(this.DRAG);
-        this.body.setMaxVelocity(this.MAX_VELOCITY);
+        this.setMaxVelocity(this.MAX_VELOCITY);
     }
 
     update() {
