@@ -3,13 +3,6 @@ class Menu extends Phaser.Scene{
         super("menuScene");
     }
 
-    preload() {
-        // load audio
-        //this.load.audio('sfx_select', './assets/blip_select12.wav');
-
-        
-    }
-
     create(){
         // menu display
         let menuConfig = {

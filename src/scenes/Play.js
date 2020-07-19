@@ -3,12 +3,6 @@ class Play extends Phaser.Scene{
         super("playScene");
     }
 
-    preload(){
-        this.load.image('astronaut', './assets/astronaut.png');
-
-
-    }
-
     create() {
         // add rocket (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 
