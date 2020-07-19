@@ -6,7 +6,7 @@ class Load extends Phaser.Scene{
     preload() {
         // Load image assets
         this.load.image('astronaut', './assets/astronaut.png');
-        this.load.image('asteroid', './assets/asteroid.png');
+        this.load.image('asteroid', './assets/asteroid1.png');
     }
 
     create(){
