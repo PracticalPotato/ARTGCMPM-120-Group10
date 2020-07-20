@@ -6,6 +6,7 @@ class Play extends Phaser.Scene{
     create() {
         // define constants
         this.asteroidVELOCITY = 300;
+        this.fasterDelay = 1;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -44,7 +45,8 @@ class Play extends Phaser.Scene{
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 100;
+                this.asteroidVELOCITY += 50;
+                this.fasterDelay *= 0.8;
             }
         }
 
@@ -57,7 +59,7 @@ class Play extends Phaser.Scene{
             * (Math.random() * (1.8 - 1) + 1));
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
-        let delay = Phaser.Math.Between(800,1400);
+        let delay = (Phaser.Math.Between(800,1400)) * (this.fasterDelay);
         var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);
     }
 
