@@ -28,7 +28,7 @@ let game = new Phaser.Game(config);
 let keyENTER, keyLEFT, keyRIGHT, keyUP, keyDOWN, keyR, keyM;
 
 game.settings = {
-    //
+    
 }
 
 // Notes: source: https://gist.github.com/kerimdzhanov/7529623

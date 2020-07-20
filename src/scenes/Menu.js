@@ -4,7 +4,6 @@ class Menu extends Phaser.Scene{
     }
 
     create(){
-        //console.log(Math.random() * (2 - 1) + 1);
         // menu display
         let menuConfig = {
             fontFamily: 'Courier',
