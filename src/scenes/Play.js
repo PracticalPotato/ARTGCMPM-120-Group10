@@ -7,11 +7,14 @@ class Play extends Phaser.Scene{
         // define constants
         this.asteroidVELOCITY = 450;
         
-        // define keys
+        // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+
+        // add background starfield
+        this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
 
         // add astronaut (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0).setOrigin(0, 0);
@@ -32,13 +35,6 @@ class Play extends Phaser.Scene{
             this.death, null, this);
     }
 
-    // astronaut death
-    death(){
-        this.gameOver = true;
-        this.p1Astronaut.destroy();
-        this.scene.start('gameOverScene');
-    }
-
     // asteroid spawn loop
     asteroidSpawn() {
         // Add asteroid
@@ -49,7 +45,15 @@ class Play extends Phaser.Scene{
         var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);
     }
 
+    // astronaut death
+    death(){
+        this.gameOver = true;
+        this.p1Astronaut.destroy();
+        this.scene.start('gameOverScene');
+    }
+
     update() {
+        this.starfield.tilePositionY -= 4;
 
         if(!this.gameOver){
             this.p1Astronaut.update();
