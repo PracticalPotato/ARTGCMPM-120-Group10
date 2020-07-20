@@ -12,10 +12,10 @@ let config = {
         default: 'arcade',
         arcade: {
             debug: true,
-            gravity: {
-                x: 0,
-                y: 0
-            }
+            //gravity: {
+                //x: 0,
+                //y: 0
+            //}
         }
     },
     scene: [Load, Menu, Play, GameOver],
@@ -30,3 +30,14 @@ let keyENTER, keyLEFT, keyRIGHT, keyUP, keyDOWN, keyR, keyM;
 game.settings = {
     //
 }
+
+// Notes: source: https://gist.github.com/kerimdzhanov/7529623
+// Get a random floating point number between min and max
+// var value = Math.random() * (max - min) + min;
+
+// Get a random integer between min and max
+// var value = Math.floor(Math.random() * (max - min + 1) + min);
+// Phaser.Math.Between(min, max);
+
+// Get a random boolean value.
+// Math.random() >= 0.5;
