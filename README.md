@@ -3,3 +3,6 @@
 # Calvin Rong
 
 The difficulty of the game increases over time, eventually player would die and gameover.
+
+Playable link:
+https://practicalpotato.github.io/ARTGCMPM-120-Group10/

@@ -1,9 +1,9 @@
 // Asteroid prefab, used in Play.js
 class Asteroid extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, velocity){
-        // Note: Try this -- John
-        super(scene, (Math.floor(Math.random() * (game.config.width - 0 + 1) + 0)), 
-        -100, 'asteroid' + Math.floor(Math.random() * (3 - 1 + 1) + 1), 0);
+        // Could be a better way to access random asteroid sprites. -Calvin
+        super(scene, Phaser.Math.Between(0, game.config.width), -100,
+            'asteroid' + Phaser.Math.Between(1, 3));
 
         // add object to existing scene
         scene.add.existing(this);
