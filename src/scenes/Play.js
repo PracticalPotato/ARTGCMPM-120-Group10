@@ -56,7 +56,8 @@ class Play extends Phaser.Scene{
     asteroidSpawn() {
         // Add asteroid
         let asteroid = new Asteroid(this, this.asteroidVELOCITY 
-            * (Math.random() * (1.8 - 1) + 1));
+            * (Math.random() * (1.3 - 1) + 1));
+        asteroid.rotation += Math.random() * 360;
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(800,1400)) * (this.fasterDelay);
@@ -77,7 +78,7 @@ class Play extends Phaser.Scene{
         if(!this.gameOver){
             this.p1Astronaut.update();
         }
-
+        this.asteroidGroup.rotate(0.05);
     }
     
 
