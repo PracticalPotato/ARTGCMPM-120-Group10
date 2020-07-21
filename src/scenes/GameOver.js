@@ -4,6 +4,9 @@ class GameOver extends Phaser.Scene{
     }
 
     create(){
+        // add sound volume
+        this.select = this.sound.add('select', {volume: 1});
+
         // define keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
@@ -37,9 +40,11 @@ class GameOver extends Phaser.Scene{
 
     update(){
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.select.play();
             this.scene.start("playScene");    
         } 
         if (Phaser.Input.Keyboard.JustDown(keyM)) {
+            this.select.play();
             this.scene.start("menuScene");    
         } 
     }
