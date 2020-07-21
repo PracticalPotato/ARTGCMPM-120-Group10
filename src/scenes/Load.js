@@ -7,9 +7,9 @@ class Load extends Phaser.Scene{
         // Load image assets
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('astronaut', './assets/astronaut.png');
-        this.load.image('asteroid1', './assets/asteroid1.png');
-        this.load.image('asteroid2', './assets/asteroid2.png');
-        this.load.image('asteroid3', './assets/asteroid3.png');
+        this.load.image('asteroid1', './assets/Asteroid1.png');
+        this.load.image('asteroid2', './assets/Asteroid2.png');
+        this.load.image('asteroid3', './assets/Asteroid3.png');
         this.load.image('pickup', './assets/PickUp.png');
         this.load.audio('sfx_break', './assets/audio/Break.wav');
         this.load.audio('sfx_select', './assets/audio/Select.wav');
