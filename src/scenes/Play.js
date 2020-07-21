@@ -37,7 +37,7 @@ class Play extends Phaser.Scene{
 
         // difficulty increase
         this.timedEvent = this.time.addEvent({ 
-            delay: 10000, 
+            delay: 15000, 
             callback: onEvent, 
             callbackScope: this, 
             loop: true, 
@@ -45,8 +45,8 @@ class Play extends Phaser.Scene{
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 50;
-                this.fasterDelay *= 0.8;
+                this.asteroidVELOCITY += 40;
+                this.fasterDelay *= 0.9;
             }
         }
 
