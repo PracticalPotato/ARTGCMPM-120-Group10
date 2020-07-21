@@ -6,11 +6,10 @@ class Play extends Phaser.Scene{
     create() {
         // add sound volume
         this.break = this.sound.add('sfx_break', {volume: 0.5});
-        this.pickups = this.sound.add('sfx_pickups', {volume: 0.7});
-        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.7});
-        //this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.7});
+        this.pickups = this.sound.add('sfx_pickups', {volume: 0.6});
+        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.6});
         // add music
-        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 1});
+        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.8});
         this.bgMusic.loop = true;
         this.bgMusic.play();
 
