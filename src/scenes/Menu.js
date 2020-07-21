@@ -5,7 +5,7 @@ class Menu extends Phaser.Scene{
 
     create(){
         // add sound volume
-        this.select = this.sound.add('select', {volume: 1});
+        this.select = this.sound.add('sfx_select', {volume: 1});
 
         // menu display
         let menuConfig = {

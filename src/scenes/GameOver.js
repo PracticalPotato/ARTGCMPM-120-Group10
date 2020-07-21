@@ -5,7 +5,7 @@ class GameOver extends Phaser.Scene{
 
     create(){
         // add sound volume
-        this.select = this.sound.add('select', {volume: 1});
+        this.select = this.sound.add('sfx_select', {volume: 1});
 
         // define keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
