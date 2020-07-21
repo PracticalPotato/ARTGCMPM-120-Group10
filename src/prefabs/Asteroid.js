@@ -12,6 +12,7 @@ class Asteroid extends Phaser.Physics.Arcade.Sprite{
         // config the physics
         this.setImmovable();
         this.setVelocityY(velocity);
+        this.body.setCircle(this.displayWidth/2);
 
     }
 
