@@ -4,6 +4,9 @@ class Play extends Phaser.Scene{
     }
 
     create() {
+        // add sound volume
+        this.break = this.sound.add('break', {volume: 0.3});
+
         // define constants
         this.asteroidVELOCITY = 300;
         this.fasterDelay = 1;
@@ -40,13 +43,14 @@ class Play extends Phaser.Scene{
             delay: 15000, 
             callback: onEvent, 
             callbackScope: this, 
-            loop: true, 
+            //loop: true,
+            repeat: 5, 
         });
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 40;
-                this.fasterDelay *= 0.9;
+                this.asteroidVELOCITY += 25;
+                this.fasterDelay *= 0.87;
             }
         }
 
@@ -66,7 +70,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     death(){
-        this.sound.play('break');
+        this.break.play();
         this.gameOver = true;
         this.p1Astronaut.destroy();
         this.scene.start('gameOverScene');

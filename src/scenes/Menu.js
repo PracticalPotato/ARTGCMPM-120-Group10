@@ -4,6 +4,9 @@ class Menu extends Phaser.Scene{
     }
 
     create(){
+        // add sound volume
+        this.select = this.sound.add('select', {volume: 1});
+
         // menu display
         let menuConfig = {
             fontFamily: 'Courier',
@@ -40,7 +43,7 @@ class Menu extends Phaser.Scene{
     }
     update() {
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
-            this.sound.play('select');
+            this.select.play();
             this.scene.start("playScene");    
         } 
     }
