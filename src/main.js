@@ -18,7 +18,7 @@ let config = {
             //}
         }
     },
-    scene: [Load, Menu, Play, GameOver],
+    scene: [Load, Menu, ,Tutorial, Play, GameOver],
 };
 
 // create main game object
