@@ -7,9 +7,9 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // this.MOVESPEED = 10;
 
         // define constants (physics movement)
-        this.ACCELERATION = 10000;
-        this.MAX_VELOCITY = 800;
-        this.DRAG = 0.6;
+        this.ACCELERATION = 200;
+        this.MAX_VELOCITY = 2.5;
+        this.DRAG = 0.96;
 
         // // define constants (explosive physics movement)
         // this.EXPLOSION_VELOCITY = 2000;
@@ -22,10 +22,10 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // config the physics
         this.setImmovable();
         this.setCollideWorldBounds(true);
-        this.setBounce(.5, .5);
+        //this.setBounce(.5, .5);
         this.setDamping(true);
         this.setDrag(this.DRAG);
-        this.setMaxVelocity(this.MAX_VELOCITY);
+        //this.setMaxVelocity(this.MAX_VELOCITY);
     }
 
     update() {
@@ -46,16 +46,20 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // physics-based normal movement
         if(keyLEFT.isDown) {
             this.body.acceleration.x = -this.ACCELERATION;
+            this.x -= this.MAX_VELOCITY;
         } else if(keyRIGHT.isDown) {
             this.body.acceleration.x = this.ACCELERATION;
+            this.x += this.MAX_VELOCITY;
         } else {
             this.body.acceleration.x = 0;
         }
         
         if(keyUP.isDown) {
             this.body.acceleration.y = -this.ACCELERATION;
+            this.y -= this.MAX_VELOCITY;
         } else if(keyDOWN.isDown) {
             this.body.acceleration.y = this.ACCELERATION;
+            this.y += this.MAX_VELOCITY;
         } else {
             this.body.acceleration.y = 0;
         }

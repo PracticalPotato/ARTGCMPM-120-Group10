@@ -17,6 +17,7 @@ class Play extends Phaser.Scene{
         this.asteroidVELOCITY = 200;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 200;
+        this.lives = 3;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -26,7 +27,7 @@ class Play extends Phaser.Scene{
 
         // add background starfield
         this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield2').setOrigin(0, 0);
-        this.starfieldSpeed = 3;
+        this.starfieldSpeed = 1.5;
 
         // score display
         this.scoreConfig = {
@@ -91,9 +92,9 @@ class Play extends Phaser.Scene{
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 14;
-                this.fasterDelay *= 0.9;
-                this.starfieldSpeed += 0.4;
+                this.asteroidVELOCITY += 13;
+                this.fasterDelay *= 0.92;
+                this.starfieldSpeed += 0.3;
             }
         }
     }
@@ -114,7 +115,7 @@ class Play extends Phaser.Scene{
     pickupSpawn() {
         // Add pickup
         this.pickup = new PickUp(this, this.pickupVELOCITY 
-            * (Math.random() * (1.4 - 1) + 1)).setScale(0.8, 0.8);
+            * (Math.random() * (1.2 - 0.8) + 0.8)).setScale(0.8, 0.8);
         this.pickup.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup.add(this.pickup);
         // Call pickupSpawn on a random delay
@@ -124,7 +125,7 @@ class Play extends Phaser.Scene{
     pickupSpawn2() {
         // Add pickup2
         this.pickup2 = new PickUp(this, this.pickupVELOCITY 
-            * (Math.random() * (1.4 - 1) + 1)).setScale(0.8, 0.8);
+            * (Math.random() * (1.1 - 0.7) + 0.7)).setScale(0.8, 0.8);
         this.pickup2.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup2.add(this.pickup2);
         // Call pickupSpawn on a random delay
@@ -133,24 +134,29 @@ class Play extends Phaser.Scene{
     }
 
     // astronaut death
-    astronautDeath(){
+    astronautDeath(astronaut, asteroid){
+        this.lives --;
+        console.log(this.lives);
         this.break.play();
-        this.gameOver = true;
-        this.p1Astronaut.destroy();
-        this.scene.start('gameOverScene');
-        this.bgMusic.stop();
+        asteroid.destroy();
+        if(this.lives <= 0){
+            this.gameOver = true;
+            this.p1Astronaut.destroy();
+            this.scene.start('gameOverScene');
+            this.bgMusic.stop();
+        }
     }
 
     // pickup death
-    pickupDeath(){
+    pickupDeath(astronaut, pickup){
         this.pickups.play();
-        this.pickupGroup.clear(this.pickup, true);
+        pickup.destroy();
         this.score += 10;
         this.scoreT.text = this.score;
     }
-    pickupDeath2(){
+    pickupDeath2(astronaut, pickup2){
         this.pickups2.play();
-        this.pickupGroup2.clear(this.pickup2, true);
+        pickup2.destroy();
         this.score += 10;
         this.scoreT.text = this.score;
     }
