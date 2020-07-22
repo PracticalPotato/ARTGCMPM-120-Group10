@@ -5,16 +5,16 @@ class Play extends Phaser.Scene{
 
     create() {
         // add sound volume
-        this.break = this.sound.add('sfx_break', {volume: 0.5});
-        this.pickups = this.sound.add('sfx_pickups', {volume: 0.6});
-        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.6});
+        this.break = this.sound.add('sfx_break', {volume: 0.2});
+        this.pickups = this.sound.add('sfx_pickups', {volume: 0.3});
+        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.3});
         // add music
-        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.8});
+        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.5});
         this.bgMusic.loop = true;
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 270;
+        this.asteroidVELOCITY = 200;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 200;
         
@@ -24,13 +24,17 @@ class Play extends Phaser.Scene{
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
 
+        // add background starfield
+        this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield2').setOrigin(0, 0);
+        this.starfieldSpeed = 3;
+
         // score display
         this.scoreConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'fantasy',
             fontSize: '28px',
             fontStyle: '',
             backgroundColor: '',
-            color: 'white',
+            color: 'gold',
             align: 'right',
             padding: {
                 top: 5,
@@ -39,11 +43,8 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         } 
         this.score = 0;
-        this.add.text(20, 20, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(125, 21, this.score, this.scoreConfig);
-        
-        // add background starfield
-        this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
+        this.add.text(20, 17, 'Score:', this.scoreConfig);
+        this.scoreT = this.add.text(105, 18, this.score, this.scoreConfig);
 
         // add astronaut (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0).setOrigin(0, 0);
@@ -85,13 +86,14 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 8, 
+            repeat: 9, 
         });
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 15;
-                this.fasterDelay *= 0.87;
+                this.asteroidVELOCITY += 14;
+                this.fasterDelay *= 0.9;
+                this.starfieldSpeed += 0.4;
             }
         }
     }
@@ -112,7 +114,7 @@ class Play extends Phaser.Scene{
     pickupSpawn() {
         // Add pickup
         this.pickup = new PickUp(this, this.pickupVELOCITY 
-            * (Math.random() * (1.3 - 1) + 1)).setScale(0.7, 0.7);
+            * (Math.random() * (1.4 - 1) + 1)).setScale(0.8, 0.8);
         this.pickup.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup.add(this.pickup);
         // Call pickupSpawn on a random delay
@@ -122,7 +124,7 @@ class Play extends Phaser.Scene{
     pickupSpawn2() {
         // Add pickup2
         this.pickup2 = new PickUp(this, this.pickupVELOCITY 
-            * (Math.random() * (1.3 - 1) + 1)).setScale(0.7, 0.7);
+            * (Math.random() * (1.4 - 1) + 1)).setScale(0.8, 0.8);
         this.pickup2.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup2.add(this.pickup2);
         // Call pickupSpawn on a random delay
@@ -154,7 +156,7 @@ class Play extends Phaser.Scene{
     }
 
     update() {
-        this.starfield.tilePositionY -= 4;
+        this.starfield.tilePositionY -= this.starfieldSpeed;
 
         if(!this.gameOver){
             this.p1Astronaut.update();

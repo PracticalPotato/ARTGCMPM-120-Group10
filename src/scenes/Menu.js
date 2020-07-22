@@ -4,8 +4,11 @@ class Menu extends Phaser.Scene{
     }
 
     create(){
+        // add background starfield
+        this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
+
         // add sound volume
-        this.select = this.sound.add('sfx_select', {volume: 1});
+        this.select = this.sound.add('sfx_select', {volume: 0.8});
 
         // menu display
         let menuConfig = {
@@ -42,6 +45,7 @@ class Menu extends Phaser.Scene{
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
     update() {
+        this.starfield.tilePositionY += 1;
         if (Phaser.Input.Keyboard.JustDown(keyENTER)) {
             this.select.play();
             this.scene.start("tutorialScene");    
