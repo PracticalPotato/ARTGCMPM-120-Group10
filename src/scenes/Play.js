@@ -16,7 +16,7 @@ class Play extends Phaser.Scene{
         // define constants
         this.asteroidVELOCITY = 190;
         this.fasterDelay = 1;
-        this.pickupVELOCITY = 200;
+        this.pickupVELOCITY = 150;
         this.lives = 3;
         
         // define keys, declared in main.js
@@ -48,7 +48,7 @@ class Play extends Phaser.Scene{
         this.scoreT = this.add.text(105, 18, this.score, this.scoreConfig);
 
         // add astronaut (p1)
-        this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0).setOrigin(0, 0);
+        this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0);
 
         // setup asteroid group
         this.asteroidGroup = this.add.group({
