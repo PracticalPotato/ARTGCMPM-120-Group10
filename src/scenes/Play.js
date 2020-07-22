@@ -14,7 +14,7 @@ class Play extends Phaser.Scene{
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 200;
+        this.asteroidVELOCITY = 190;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 200;
         this.lives = 3;
@@ -93,7 +93,7 @@ class Play extends Phaser.Scene{
         {
             if(!this.gameOver){
                 this.asteroidVELOCITY += 13;
-                this.fasterDelay *= 0.92;
+                this.fasterDelay *= 0.93;
                 this.starfieldSpeed += 0.3;
             }
         }
@@ -119,7 +119,7 @@ class Play extends Phaser.Scene{
         this.pickup.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup.add(this.pickup);
         // Call pickupSpawn on a random delay
-        let delay = (Phaser.Math.Between(3200,3700));
+        let delay = (Phaser.Math.Between(2000,3000));
         var timer = this.time.delayedCall(delay, this.pickupSpawn, [], this);    
     }
     pickupSpawn2() {
@@ -129,7 +129,7 @@ class Play extends Phaser.Scene{
         this.pickup2.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup2.add(this.pickup2);
         // Call pickupSpawn on a random delay
-        let delay = (Phaser.Math.Between(3200,3700));
+        let delay = (Phaser.Math.Between(2000,3000));
         var timer = this.time.delayedCall(delay, this.pickupSpawn2, [], this);    
     }
 
