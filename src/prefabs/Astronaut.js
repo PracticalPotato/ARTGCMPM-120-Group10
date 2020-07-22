@@ -24,6 +24,7 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
         //this.setBounce(.5, .5);
         this.setMaxVelocity(this.MAX_VELOCITY);
+        this.body.setSize(this.displayWidth*0.9, this.displayHeight*0.9)
     }
 
     update() {
