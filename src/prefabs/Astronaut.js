@@ -24,14 +24,8 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         //this.setMaxVelocity(this.MAX_VELOCITY);
         this.body.setSize(this.displayWidth*0.9, this.displayHeight*0.9)
 
-        // double tap flags
-        this.lastLeft;
-        this.lastRight;
-        this.lastUp;
-        this.lastDown;
-
         // dash flags
-        this.lastDash;
+        this.canDash = true;
         this.DASH_COOLDOWN = 500;
     }
 
@@ -68,53 +62,22 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         }
 
         // Dashing
-        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            let leftDelay = this.scene.time.now - this.lastLeft;
-            this.lastLeft = this.scene.time.now;
-            if(leftDelay < 350) {
-                let dashDelay = this.scene.time.now - this.lastDash;
-                if(dashDelay > this.DASH_COOLDOWN) {
-                    this.lastDash = this.scene.time.now;
-                    this.body.setVelocityX(-800);
-                }
-            }
-        }
-
-        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            let rightDelay = this.scene.time.now - this.lastRight;
-            this.lastRight = this.scene.time.now;
-            if(rightDelay < 350) {
-                let dashDelay = this.scene.time.now - this.lastDash;
-                if(dashDelay > this.DASH_COOLDOWN) {
-                    this.lastDash = this.scene.time.now;
-                    this.body.setVelocityX(800);
-                }
-            }
-        }
-
-        if (Phaser.Input.Keyboard.JustDown(keyUP)) {
-            let upDelay = this.scene.time.now - this.lastUp;
-            this.lastUp = this.scene.time.now;
-            if(upDelay < 350) {
-                let dashDelay = this.scene.time.now - this.lastDash;
-                if(dashDelay > this.DASH_COOLDOWN) {
-                    this.lastDash = this.scene.time.now;
-                    this.body.setVelocityY(-800);
-                }
-            }
-        }
-
-        if (Phaser.Input.Keyboard.JustDown(keyDOWN)) {
-            let downDelay = this.scene.time.now - this.lastDown;
-            this.lastDown = this.scene.time.now;
-            if(downDelay < 350) {
-                let dashDelay = this.scene.time.now - this.lastDash;
-                this.lastDash = this.scene.time.now;
-                if(dashDelay > this.DASH_COOLDOWN) {
-                    this.body.setVelocityY(800);
-                }
-            }
-        }
+        // if (Phaser.Input.Keyboard.JustDown(keySPACE) && this.canDash) {
+        //     if(keyLEFT.isDown || keyRIGHT.isDown || keyUP.isDown || keyDOWN.isDown) {
+        //         this.canDash = false;
+        //         this.time.delayedCall(this.DASH_COOLDOWN, ()=>{this.canDash = true}, [], this);
+        //         if(keyLEFT.isDown) {
+        //             this.body.setVelocityX(-800);
+        //         } else if (keyRIGHT.isDown) {
+        //             this.body.setVelocityX(800);
+        //         }
+        //         if(keyUP.isDown) {
+        //             this.body.setVelocityY(-800);
+        //         } else if(keyDOWN.isDown) {
+        //             this.body.setVelocityY(800);
+        //         }
+        //     }
+        // }
 
         // // self-implemented maxvelocity
         // if (this.body.velocity.x > this.MAX_VELOCITY) {
