@@ -31,7 +31,7 @@ class Play extends Phaser.Scene{
         // score display
         this.scoreConfig = {
             fontFamily: 'fantasy',
-            fontSize: '28px',
+            fontSize: '27px',
             fontStyle: '',
             backgroundColor: '',
             color: 'gold',
@@ -44,7 +44,10 @@ class Play extends Phaser.Scene{
         } 
         this.score = 0;
         this.add.text(20, 16, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(105, 18, this.score, this.scoreConfig);
+        this.scoreT = this.add.text(101, 18, this.score, this.scoreConfig);
+        // high score
+        this.add.text(280, 16, 'High Score:', this.scoreConfig);
+        this.highScoreT = this.add.text(415, 17.5, highScore, this.scoreConfig);
 
         // lives display
         this.lives = 3;
@@ -191,12 +194,20 @@ class Play extends Phaser.Scene{
         pickup.destroy();
         this.score += 10;
         this.scoreT.text = this.score;
+        if(highScore < this.score){
+            highScore = this.score;
+            this.highScoreT.text= this.score;
+        }
     }
     pickupDeath2(astronaut, pickup2){
         this.pickups2.play();
         pickup2.destroy();
         this.score += 10;
         this.scoreT.text = this.score;
+        if(highScore < this.score){
+            highScore = this.score;
+            this.highScoreT.text= this.score;
+        }
     }
 
     update() {

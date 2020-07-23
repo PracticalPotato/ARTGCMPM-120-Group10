@@ -18,7 +18,7 @@ class Load extends Phaser.Scene{
         this.load.image('asteroid3', './assets/Asteroid3.png');
         this.load.image('tutorial', './assets/TutorialMockup.png');
         this.load.image('pickup', './assets/PickUp.png');
-        this.load.image('alien', './assets/Alien.png');
+        this.load.image('alien', './assets/alien2.png');
         this.load.audio('sfx_break', './assets/audio/Break.wav');
         this.load.audio('sfx_select', './assets/audio/Select.wav');
         this.load.audio('sfx_pickups', './assets/audio/Pickup.wav');

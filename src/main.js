@@ -28,8 +28,8 @@ let game = new Phaser.Game(config);
 let keyENTER, keyLEFT, keyRIGHT, keyUP, keyDOWN, keyR, keyM;
 
 // define globals
-let highScore;
-let newHighScore;
+let highScore = 0;
+let newHighScore = false;
 
 game.settings = {
     

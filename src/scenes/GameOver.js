@@ -35,6 +35,24 @@ class GameOver extends Phaser.Scene{
             repeat: -1,            // -1: infinity
             yoyo: false
         });
+
+        // score display
+        this.scoreConfig = {
+            fontFamily: 'fantasy',
+            fontSize: '27px',
+            fontStyle: '',
+            backgroundColor: '',
+            color: 'gold',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        // high score
+        this.add.text(151, 430, 'High Score:', this.scoreConfig);
+        this.add.text(282, 431, highScore, this.scoreConfig);
     }
 
     update(){
