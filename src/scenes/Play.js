@@ -55,6 +55,11 @@ class Play extends Phaser.Scene{
             runchildUpdate: true
         });
 
+        // setup alien group
+        this.alienGroup = this.add.group({
+            runchildUpdate: true
+        });
+
         // setup pickup group
         this.pickupGroup = this.add.group({
             runchildUpdate: true
@@ -65,6 +70,9 @@ class Play extends Phaser.Scene{
 
         // start asteroid spawn loop
         this.asteroidSpawn();
+
+        // start alien spawn loop
+        this.alienSpawn();
 
         // start pickup spawn loop
         this.pickupSpawn();
@@ -80,6 +88,8 @@ class Play extends Phaser.Scene{
             this.pickupDeath, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.pickupGroup2, 
             this.pickupDeath2, null, this);
+        this.physics.add.overlap(this.p1Astronaut, this.alienGroup, 
+            this.astronautDeath, null, this);
 
         // difficulty increase
         this.timedEvent = this.time.addEvent({ 
@@ -87,13 +97,13 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 9, 
+            repeat: 10, 
         });
         function onEvent ()
         {
             if(!this.gameOver){
                 this.asteroidVELOCITY += 12.5;
-                this.fasterDelay *= 0.94;
+                this.fasterDelay *= 0.93;
                 this.starfieldSpeed += 0.3;
             }
         }
@@ -109,6 +119,18 @@ class Play extends Phaser.Scene{
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(700,1400)) * (this.fasterDelay);
         var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);
+        
+    }
+
+    // alien spawn loop
+    alienSpawn() {
+        // Add asteroid
+        var alien = new Alien(this, this.asteroidVELOCITY 
+            * (Math.random() * (1.4 - 1.2) + 1.2)).setScale(0.1, 0.1);
+        this.alienGroup.add(alien);
+        // Call asteroidSpawn on a random delay
+        let delay = (Phaser.Math.Between(3500,4000)) * (this.fasterDelay);
+        var timer = this.time.delayedCall(delay, this.alienSpawn, [], this);
     }
 
     // pickup spawn loop
@@ -174,6 +196,7 @@ class Play extends Phaser.Scene{
         // pickup rotation
         this.pickupGroup.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
         this.pickupGroup2.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
+
     }
     
 }

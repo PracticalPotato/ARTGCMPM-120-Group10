@@ -22,8 +22,8 @@ class Asteroid extends Phaser.Physics.Arcade.Sprite{
         }
     }
 
-    reset() {
-        this.x = game.config.width;
-    }
+    //reset() {
+        //this.x = game.config.width;
+    //}
         
 }
