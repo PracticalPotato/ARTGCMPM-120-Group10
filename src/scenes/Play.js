@@ -125,6 +125,8 @@ class Play extends Phaser.Scene{
             this.pickupDeath2, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.alienGroup, 
             this.astronautDeath, null, this);
+        this.physics.add.overlap(this.p1Astronaut, this.powerUpGroup, 
+            this.powerUpDeath, null, this);
 
         // difficulty increase
         this.timedEvent = this.time.addEvent({ 
@@ -213,6 +215,12 @@ class Play extends Phaser.Scene{
             this.scene.start('gameOverScene');
             this.bgMusic.stop();
         }
+    }
+
+    // powerUp death
+    powerUpDeath(astronaut, powerup){
+        this.pickups.play();
+        powerup.destroy();
     }
 
     // pickup death
