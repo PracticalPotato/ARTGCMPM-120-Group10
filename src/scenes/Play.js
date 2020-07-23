@@ -91,7 +91,7 @@ class Play extends Phaser.Scene{
         });
 
         // start powerUp spawn loop
-        this.timedEvent3 = this.time.delayedCall(100, 
+        this.timedEvent3 = this.time.delayedCall(10000, 
             onEvent3, [], this);
         function onEvent3 ()
         {
