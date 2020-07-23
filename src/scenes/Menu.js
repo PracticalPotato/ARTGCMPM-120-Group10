@@ -29,7 +29,7 @@ class Menu extends Phaser.Scene{
         let centerY = game.config.height/2;
         let textSpacer = 64;
         
-        this.add.image(centerX, centerY - textSpacer, 'missionImpossible')
+        this.add.sprite(centerX, centerY - textSpacer, 'missionImpossible')
             .setScale(1).setOrigin(0.5);
         this.enter = this.add.sprite(centerX, centerY - textSpacer + 100 , 'enterStart')
             .setScale(0.65).setOrigin(0.5);

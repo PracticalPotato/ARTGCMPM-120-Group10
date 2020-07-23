@@ -14,31 +14,27 @@ class GameOver extends Phaser.Scene{
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         keyM = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
 
-        // menu display
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '38px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-
-        // show menu text
+        // gameover text
         let centerX = game.config.width/2;
         let centerY = game.config.height/2;
         let textSpacer = 64;
-        this.add.text(centerX, centerY - textSpacer, 'GAME OVER', 
-        menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#000';
-        menuConfig.fontSize = '28px';
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 
-            '(R)estart or (M)enu', menuConfig).setOrigin(0.5);
+        this.add.sprite(centerX, centerY - textSpacer, 'gameOver')
+            .setScale(1).setOrigin(0.5);
+        this.choice = this.add.sprite(centerX, centerY - textSpacer + 100 , 'restart')
+            .setScale(0.65).setOrigin(0.5);
+        // image enter shake: source: notes of phaser 3 
+        this.tweens.add({
+            targets: this.choice,
+            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
+            alpha: { from: 0, to: 1 },
+            // alpha: { start: 0, to: 1 },
+            // alpha: 1,
+            // alpha: '+=1',
+            ease: 'Bounce',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
+            duration: 1000,
+            repeat: -1,            // -1: infinity
+            yoyo: false
+        });
     }
 
     update(){
