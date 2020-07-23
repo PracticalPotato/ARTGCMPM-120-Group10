@@ -5,6 +5,7 @@ class Load extends Phaser.Scene{
 
     preload() {
         // Load image assets
+        this.load.image('lives', './assets/lives.png');
         this.load.image('restart', './assets/restart.png');
         this.load.image('gameOver', './assets/gameOver.png');
         this.load.image('missionImpossible', './assets/MissionImpossible.png');

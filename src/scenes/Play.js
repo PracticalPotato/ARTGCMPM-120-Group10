@@ -17,7 +17,6 @@ class Play extends Phaser.Scene{
         this.asteroidVELOCITY = 170;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 150;
-        this.lives = 3;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -44,8 +43,24 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         } 
         this.score = 0;
-        this.add.text(20, 17, 'Score:', this.scoreConfig);
+        this.add.text(20, 16, 'Score:', this.scoreConfig);
         this.scoreT = this.add.text(105, 18, this.score, this.scoreConfig);
+
+        // lives display
+        this.lives = 3;
+        this.livesText = this.add.sprite(200, 615, 'lives')
+            .setScale(0.55).setOrigin(0.5);
+        // image lives shake: source: notes of phaser 3 
+        this.tweens.add({
+            targets: this.livesText,
+            y: { from: 617, to: 622 },
+            ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
+            duration: 500,
+            repeat: -1,            // -1: infinity
+            yoyo: false
+        });
+        this.scoreConfig.color = 'red';
+        this.livesNumber = this.add.text(260, 600, this.lives, this.scoreConfig);
 
         // add astronaut (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0);
@@ -126,7 +141,7 @@ class Play extends Phaser.Scene{
     alienSpawn() {
         // Add asteroid
         var alien = new Alien(this, this.asteroidVELOCITY 
-            * (Math.random() * (1.4 - 1.2) + 1.2)).setScale(0.1, 0.1);
+            * (Math.random() * (1.5 - 1.3) + 1.3)).setScale(0.1, 0.1);
         this.alienGroup.add(alien);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(3500,4000)) * (this.fasterDelay);
@@ -159,7 +174,7 @@ class Play extends Phaser.Scene{
     astronautDeath(astronaut, asteroid){
         this.cameras.main.shake(1500, 0.08); 
         this.lives --;
-        console.log(this.lives);
+        this.livesNumber.text = this.lives;
         this.break.play();
         asteroid.destroy();
         if(this.lives <= 0){
