@@ -44,8 +44,8 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         } 
         this.score = 0;
-        this.add.text(20, 16, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(101, 18, this.score, this.scoreConfig);
+        this.add.text(20, 15, 'Score:', this.scoreConfig);
+        this.scoreT = this.add.text(100, 16.5, this.score, this.scoreConfig);
         // high score
         this.add.text(280, 16, 'High Score:', this.scoreConfig);
         this.highScoreT = this.add.text(415, 17.5, highScore, this.scoreConfig);
@@ -91,7 +91,7 @@ class Play extends Phaser.Scene{
         });
 
         // start powerUp spawn loop
-        this.timedEvent3 = this.time.delayedCall(10000, 
+        this.timedEvent3 = this.time.delayedCall(100, 
             onEvent3, [], this);
         function onEvent3 ()
         {
@@ -151,6 +151,20 @@ class Play extends Phaser.Scene{
         // Add asteroid
         var powerUp = new PowerUp(this, this.pickupVELOCITY 
             * (Math.random() * (1.3 - 1) + 1)).setScale(1, 1);
+        // blink
+        this.tweens.add({
+            targets: powerUp,
+            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
+            alpha: { from: 0, to: 0.9 },
+            // alpha: { start: 0, to: 1 },
+            // alpha: 1,
+            // alpha: '+=1',
+            ease: 'Elastic',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
+            duration: 700,
+            repeat: -1,            // -1: infinity
+            yoyo: false
+        });
+
         this.powerUpGroup.add(powerUp);
         // Call powerUpSpawn on a random delay
         let delay = (Phaser.Math.Between(5000,5500)) * (this.fasterDelay);
