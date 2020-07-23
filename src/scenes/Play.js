@@ -176,7 +176,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     astronautDeath(astronaut, asteroid){
-        this.cameras.main.shake(100, 0.05); 
+        this.cameras.main.shake(1000, 0.1); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
