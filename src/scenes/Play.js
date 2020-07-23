@@ -74,11 +74,14 @@ class Play extends Phaser.Scene{
             runchildUpdate: true
         });
 
+        // setup powerUp group
+        this.powerUpGroup = this.add.group({
+            runchildUpdate: true
+        });
         // setup alien group
         this.alienGroup = this.add.group({
             runchildUpdate: true
         });
-
         // setup pickup group
         this.pickupGroup = this.add.group({
             runchildUpdate: true
@@ -87,11 +90,24 @@ class Play extends Phaser.Scene{
             runchildUpdate: true
         });
 
+        // start powerUp spawn loop
+        this.timedEvent3 = this.time.delayedCall(10000, 
+            onEvent3, [], this);
+        function onEvent3 ()
+        {
+            this.powerUpSpawn();
+        }
+
         // start asteroid spawn loop
         this.asteroidSpawn();
 
         // start alien spawn loop
-        this.alienSpawn();
+        this.timedEvent2 = this.time.delayedCall(25000, 
+            onEvent2, [], this);
+        function onEvent2 ()
+        {
+            this.alienSpawn();
+        }
 
         // start pickup spawn loop
         this.pickupSpawn();
@@ -116,7 +132,7 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 10, 
+            repeat: 11, 
         });
         function onEvent ()
         {
@@ -128,6 +144,17 @@ class Play extends Phaser.Scene{
         }
     }
 
+    // powerUp spawn loop
+    powerUpSpawn() {
+        // Add asteroid
+        var powerUp = new PowerUp(this, this.pickupVELOCITY 
+            * (Math.random() * (1.3 - 1) + 1)).setScale(1, 1);
+        this.powerUpGroup.add(powerUp);
+        // Call powerUpSpawn on a random delay
+        let delay = (Phaser.Math.Between(5000,5500)) * (this.fasterDelay);
+        var timer = this.time.delayedCall(delay, this.powerUpSpawn, [], this);       
+    }
+
     // asteroid spawn loop
     asteroidSpawn() {
         // Add asteroid
@@ -137,8 +164,7 @@ class Play extends Phaser.Scene{
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(700,1400)) * (this.fasterDelay);
-        var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);
-        
+        var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);       
     }
 
     // alien spawn loop
