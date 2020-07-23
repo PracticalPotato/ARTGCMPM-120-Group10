@@ -14,7 +14,7 @@ class Play extends Phaser.Scene{
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 190;
+        this.asteroidVELOCITY = 170;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 150;
         this.lives = 3;
@@ -92,8 +92,8 @@ class Play extends Phaser.Scene{
         function onEvent ()
         {
             if(!this.gameOver){
-                this.asteroidVELOCITY += 13;
-                this.fasterDelay *= 0.93;
+                this.asteroidVELOCITY += 12.5;
+                this.fasterDelay *= 0.94;
                 this.starfieldSpeed += 0.3;
             }
         }
@@ -103,7 +103,7 @@ class Play extends Phaser.Scene{
     asteroidSpawn() {
         // Add asteroid
         var asteroid = new Asteroid(this, this.asteroidVELOCITY 
-            * (Math.random() * (1.3 - 1) + 1));
+            * (Math.random() * (1.3 - 1) + 1)).setScale(0.95, 0.95);
         asteroid.rotation += Math.random() * 360;   // asteroid rotation
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
@@ -135,6 +135,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     astronautDeath(astronaut, asteroid){
+        this.cameras.main.shake(1500, 0.08); 
         this.lives --;
         console.log(this.lives);
         this.break.play();
