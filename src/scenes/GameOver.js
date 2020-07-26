@@ -8,7 +8,7 @@ class GameOver extends Phaser.Scene{
         this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
 
         // add sound volume
-        this.select = this.sound.add('sfx_select', {volume: 0.8});
+        this.select = this.sound.add('sfx_select', {volume: 0.4});
 
         // define keys
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);

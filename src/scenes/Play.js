@@ -6,8 +6,8 @@ class Play extends Phaser.Scene{
     create() {
         // add sound volume
         this.break = this.sound.add('sfx_break', {volume: 0.1});
-        this.pickups = this.sound.add('sfx_pickups', {volume: 0.2});
-        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.2});
+        this.pickups = this.sound.add('sfx_pickups', {volume: 0.15});
+        this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.15});
         // add music
         this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.1});
         this.bgMusic.loop = true;
@@ -44,8 +44,8 @@ class Play extends Phaser.Scene{
             fixedWidth: 0
         } 
         this.score = 0;
-        this.add.text(20, 16, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(101, 18, this.score, this.scoreConfig);
+        this.add.text(20, 15, 'Score:', this.scoreConfig);
+        this.scoreT = this.add.text(100, 16.5, this.score, this.scoreConfig);
         // high score
         this.add.text(280, 16, 'High Score:', this.scoreConfig);
         this.highScoreT = this.add.text(415, 17.5, highScore, this.scoreConfig);
@@ -74,11 +74,14 @@ class Play extends Phaser.Scene{
             runchildUpdate: true
         });
 
+        // setup powerUp group
+        this.powerUpGroup = this.add.group({
+            runchildUpdate: true
+        });
         // setup alien group
         this.alienGroup = this.add.group({
             runchildUpdate: true
         });
-
         // setup pickup group
         this.pickupGroup = this.add.group({
             runchildUpdate: true
@@ -87,11 +90,24 @@ class Play extends Phaser.Scene{
             runchildUpdate: true
         });
 
+        // start powerUp spawn loop
+        this.timedEvent3 = this.time.delayedCall(10000, 
+            onEvent3, [], this);
+        function onEvent3 ()
+        {
+            this.powerUpSpawn();
+        }
+
         // start asteroid spawn loop
         this.asteroidSpawn();
 
         // start alien spawn loop
-        this.alienSpawn();
+        this.timedEvent2 = this.time.delayedCall(25000, 
+            onEvent2, [], this);
+        function onEvent2 ()
+        {
+            this.alienSpawn();
+        }
 
         // start pickup spawn loop
         this.pickupSpawn();
@@ -109,6 +125,8 @@ class Play extends Phaser.Scene{
             this.pickupDeath2, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.alienGroup, 
             this.astronautDeath, null, this);
+        this.physics.add.overlap(this.p1Astronaut, this.powerUpGroup, 
+            this.powerUpDeath, null, this);
 
         // difficulty increase
         this.timedEvent = this.time.addEvent({ 
@@ -116,7 +134,7 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 10, 
+            repeat: 11, 
         });
         function onEvent ()
         {
@@ -128,6 +146,31 @@ class Play extends Phaser.Scene{
         }
     }
 
+    // powerUp spawn loop
+    powerUpSpawn() {
+        // Add asteroid
+        var powerUp = new PowerUp(this, this.pickupVELOCITY 
+            * (Math.random() * (1.3 - 1) + 1)).setScale(1, 1);
+        // blink
+        this.tweens.add({
+            targets: powerUp,
+            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
+            alpha: { from: 0, to: 0.9 },
+            // alpha: { start: 0, to: 1 },
+            // alpha: 1,
+            // alpha: '+=1',
+            ease: 'Elastic',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
+            duration: 700,
+            repeat: -1,            // -1: infinity
+            yoyo: false
+        });
+
+        this.powerUpGroup.add(powerUp);
+        // Call powerUpSpawn on a random delay
+        let delay = (Phaser.Math.Between(5000,5500)) * (this.fasterDelay);
+        var timer = this.time.delayedCall(delay, this.powerUpSpawn, [], this);       
+    }
+
     // asteroid spawn loop
     asteroidSpawn() {
         // Add asteroid
@@ -137,8 +180,7 @@ class Play extends Phaser.Scene{
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(700,1400)) * (this.fasterDelay);
-        var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);
-        
+        var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);       
     }
 
     // alien spawn loop
@@ -176,7 +218,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     astronautDeath(astronaut, asteroid){
-        this.cameras.main.shake(100, 0.05); 
+        this.cameras.main.shake(1000, 0.1); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
@@ -187,6 +229,12 @@ class Play extends Phaser.Scene{
             this.scene.start('gameOverScene');
             this.bgMusic.stop();
         }
+    }
+
+    // powerUp death
+    powerUpDeath(astronaut, powerup){
+        this.pickups.play();
+        powerup.destroy();
     }
 
     // pickup death
