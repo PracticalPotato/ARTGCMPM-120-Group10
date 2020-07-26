@@ -9,6 +9,7 @@ class Play extends Phaser.Scene{
         this.pickups = this.sound.add('sfx_pickups', {volume: 0.15});
         this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.15});
         this.powerUp = this.sound.add('sfx_powerUp', {volume: 0.15});
+
         // add music
         this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.15});
         this.bgMusic.loop = true;
@@ -43,10 +44,11 @@ class Play extends Phaser.Scene{
                 bottom: 5,
             },
             fixedWidth: 0
-        } 
-        this.score = 0;
+        }
+        currentScore = 0;
         this.add.text(20, 15, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(100, 16.5, this.score, this.scoreConfig);
+        this.currentScoreT = this.add.text(100, 16.5, currentScore, this.scoreConfig);
+
         // high score
         this.add.text(280, 16, 'High Score:', this.scoreConfig);
         this.highScoreT = this.add.text(415, 17.5, highScore, this.scoreConfig);
@@ -119,15 +121,15 @@ class Play extends Phaser.Scene{
 
         // collision
         this.physics.add.overlap(this.p1Astronaut, this.asteroidGroup, 
-            this.astronautDeath, null, this);
+            this.astronautHit, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.pickupGroup, 
-            this.pickupDeath, null, this);
+            this.pickupGet, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.pickupGroup2, 
-            this.pickupDeath2, null, this);
+            this.pickupGet2, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.alienGroup, 
-            this.astronautDeath, null, this);
+            this.astronautHit, null, this);
         this.physics.add.overlap(this.p1Astronaut, this.powerUpGroup, 
-            this.powerUpDeath, null, this);
+            this.powerUpGet, null, this);
 
         // difficulty increase
         this.timedEvent = this.time.addEvent({ 
@@ -218,8 +220,8 @@ class Play extends Phaser.Scene{
     }
 
     // astronaut death
-    astronautDeath(astronaut, asteroid){
-        this.cameras.main.shake(1000, 0.05); 
+    astronautHit(astronaut, asteroid){
+        this.cameras.main.shake(400, 0.03); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
@@ -233,31 +235,31 @@ class Play extends Phaser.Scene{
     }
 
     // powerUp death
-    powerUpDeath(astronaut, powerup){
+    powerUpGet(astronaut, powerup){
         this.powerUp.play();
         powerup.destroy();
         astronaut.ACCELERATION += 50;
     }
 
     // pickup death
-    pickupDeath(astronaut, pickup){
+    pickupGet(astronaut, pickup){
         this.pickups.play();
         pickup.destroy();
-        this.score += 10;
-        this.scoreT.text = this.score;
-        if(highScore < this.score){
-            highScore = this.score;
-            this.highScoreT.text= this.score;
+        currentScore += 10;
+        this.currentScoreT.text = currentScore;
+        if(highScore < currentScore){
+            highScore = currentScore;
+            this.highScoreT.text= currentScore;
         }
     }
-    pickupDeath2(astronaut, pickup2){
+    pickupGet2(astronaut, pickup2){
         this.pickups2.play();
         pickup2.destroy();
-        this.score += 10;
-        this.scoreT.text = this.score;
-        if(highScore < this.score){
-            highScore = this.score;
-            this.highScoreT.text= this.score;
+        currentScore += 10;
+        this.currentScoreT.text = currentScore;
+        if(highScore < currentScore){
+            highScore = currentScore;
+            this.highScoreT.text= currentScore;
         }
     }
 
@@ -273,7 +275,6 @@ class Play extends Phaser.Scene{
         // pickup rotation
         this.pickupGroup.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
         this.pickupGroup2.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
-
 
     }
     

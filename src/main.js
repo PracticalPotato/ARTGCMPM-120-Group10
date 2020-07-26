@@ -29,6 +29,7 @@ let keyENTER, keySPACE, keyLEFT, keyRIGHT, keyUP, keyDOWN, keyR, keyM;
 
 // define globals
 let highScore = 0;
+let currentScore = 0;
 let newHighScore = false;
 
 game.settings = {

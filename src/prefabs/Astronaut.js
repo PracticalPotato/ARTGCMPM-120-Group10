@@ -3,18 +3,11 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
 
-        // // define constants (basic movement)
-        // this.MOVESPEED = 10;
-
         // define acceleration
         this.ACCELERATION = 350;
         
         // define drag constant
         this.DRAG_MULTI = 0.97;
-
-        // // define constants (explosive physics movement)
-        // this.EXPLOSION_VELOCITY = 2000;
-        // this.MAX_VELOCITY = 4000;
 
         // add object to existing scene
         scene.add.existing(this);
@@ -34,20 +27,6 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
     }
 
     update() {
-        // // left/right/up/down movement
-        // if(keyLEFT.isDown && this.x >= 1) {
-        //     this.x -= this.MOVESPEED;
-        // }
-        // if(keyRIGHT.isDown && this.x <= 588) {
-        //     this.x += this.MOVESPEED;
-        // }
-        // if(keyUP.isDown && this.y >= 1) {
-        //     this.y -= this.MOVESPEED;
-        // }
-        // if(keyDOWN.isDown && this.y <= 427) {
-        //     this.y += this.MOVESPEED;
-        // }
-
         // set sprite and invuln state based on movement
         if (this.body.velocity.x > 50) {
             this.setFrame(1);
@@ -78,7 +57,6 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
 
         // Dashing
         if (keySPACE.isDown && this.canDash) {
-            console.log("spacebar detected");
             if(keyLEFT.isDown || keyRIGHT.isDown || keyUP.isDown || keyDOWN.isDown) {
                 this.canDash = false;
                 this.scene.time.delayedCall(this.DASH_COOLDOWN, ()=>{this.canDash = true}, [], this);
@@ -95,46 +73,7 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
             }
         }
 
-        // // self-implemented maxvelocity
-        // if (this.body.velocity.x > this.MAX_VELOCITY) {
-        //     this.setVelocityX(this.MAX_VELOCITY)
-        // } else if (this.body.velocity.x < -this.MAX_VELOCITY) {
-        //     this.setVelocityX(-this.MAX_VELOCITY)
-        // } else if (this.body.velocity.y > this.MAX_VELOCITY) {
-        //     this.setVelocityY(this.MAX_VELOCITY)
-        // } else if (this.body.velocity.y < -this.MAX_VELOCITY) {
-        //     this.setVelocityY(-this.MAX_VELOCITY)
-        // }
-
         // self-implemented drag
-        this.setVelocity(this.body.velocity.x*this.DRAG_MULTI, this.body.velocity.y*this.DRAG_MULTI);
-
-        // physics-based explosive movement (EXPERIMENTAL)
-        // if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-        //     if(this.body.velocity.x > 300) {
-        //         this.body.setVelocityX(0);
-        //     } else {
-        //         this.body.setVelocityX(-this.MAX_VELOCITY);
-        //     }
-        // } else if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-        //     if(this.body.velocity.x < -300) {
-        //         this.body.setVelocityX(0);
-        //     } else {
-        //         this.body.setVelocityX(this.MAX_VELOCITY);
-        //     }
-        // }
-
-        /*
-        if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.body.setVelocityX(this.body.velocity.x-this.EXPLOSION_VELOCITY);
-        } else if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-            this.body.setVelocityX(this.body.velocity.x+this.EXPLOSION_VELOCITY);
-        }
-        */
-       
-    }
-// reset rocket to "ground"
-    reset() {
-       
+        this.setVelocity(this.body.velocity.x*this.DRAG_MULTI, this.body.velocity.y*this.DRAG_MULTI);   
     }
 }
