@@ -11,14 +11,14 @@ class Play extends Phaser.Scene{
         this.powerUp = this.sound.add('sfx_powerUp', {volume: 0.15});
 
         // add music
-        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.15});
+        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.17});
         this.bgMusic.loop = true;
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 170;
+        this.asteroidVELOCITY = 160;
         this.fasterDelay = 1;
-        this.pickupVELOCITY = 150;
+        this.pickupVELOCITY = 140;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -137,7 +137,7 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 11, 
+            repeat: 12, 
         });
         function onEvent ()
         {
@@ -153,8 +153,8 @@ class Play extends Phaser.Scene{
     powerUpSpawn() {
         // add power ip
         var powerUp = new PowerUp(this, this.pickupVELOCITY 
-            * (Math.random() * (1.3 - 1) + 1)).setScale(1, 1);
-        // blink
+            * (Math.random() * (1.3 - 1) + 1)).setScale(1.1, 1.1);
+        // powerup blink
         this.tweens.add({
             targets: powerUp,
             //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
@@ -170,7 +170,7 @@ class Play extends Phaser.Scene{
 
         this.powerUpGroup.add(powerUp);
         // Call powerUpSpawn on a random delay
-        let delay = (Phaser.Math.Between(5500,6000)) * (this.fasterDelay);
+        let delay = (Phaser.Math.Between(6000,6500));
         var timer = this.time.delayedCall(delay, this.powerUpSpawn, [], this);       
     }
 
@@ -190,7 +190,7 @@ class Play extends Phaser.Scene{
     alienSpawn() {
         // Add asteroid
         var alien = new Alien(this, this.asteroidVELOCITY 
-            * (Math.random() * (1.5 - 1.3) + 1.3)).setScale(0.1, 0.1);
+            * (Math.random() * (1.5 - 1.3) + 1.3)).setScale(0.13, 0.13);
         this.alienGroup.add(alien);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(3500,4000)) * (this.fasterDelay);
@@ -221,7 +221,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     astronautHit(astronaut, asteroid){
-        this.cameras.main.shake(400, 0.03); 
+        this.cameras.main.shake(600, 0.04); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
@@ -238,7 +238,7 @@ class Play extends Phaser.Scene{
     powerUpGet(astronaut, powerup){
         this.powerUp.play();
         powerup.destroy();
-        astronaut.ACCELERATION += 50;
+        astronaut.ACCELERATION += 30;
     }
 
     // pickup death

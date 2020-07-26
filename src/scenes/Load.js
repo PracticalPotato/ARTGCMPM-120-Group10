@@ -5,6 +5,8 @@ class Load extends Phaser.Scene{
 
     preload() {
         // Load image assets
+        this.load.image('tutorial', './assets/tutorial.png');
+        this.load.image('arrowKeys', './assets/ArrowKeys.png');
         this.load.image('powerUp', './assets/powerUp.png');
         this.load.image('lives', './assets/lives.png');
         this.load.image('restart', './assets/restart.png');
@@ -20,9 +22,9 @@ class Load extends Phaser.Scene{
         this.load.image('asteroid1', './assets/Asteroid1.png');
         this.load.image('asteroid2', './assets/Asteroid2.png');
         this.load.image('asteroid3', './assets/Asteroid3.png');
-        this.load.image('tutorial', './assets/TutorialMockup.png');
         this.load.image('pickup', './assets/PickUp.png');
         this.load.image('alien', './assets/alien2.png');
+        this.load.audio('sfx_thruster', './assets/audio/Thruster.wav');
         this.load.audio('sfx_break', './assets/audio/Break.wav');
         this.load.audio('sfx_select', './assets/audio/Select.wav');
         this.load.audio('sfx_powerUp', './assets/audio/powerUp.wav');
@@ -32,6 +34,7 @@ class Load extends Phaser.Scene{
     }
 
     create(){
+        thruster = this.sound.add('sfx_thruster', {volume: 0.35});
         this.scene.start('menuScene');
     }
 }

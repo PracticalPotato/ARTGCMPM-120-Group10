@@ -2,12 +2,12 @@
 class Astronaut extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture, frame){
         super(scene, x, y, texture, frame);
-
+        
         // define acceleration
         this.ACCELERATION = 350;
         
         // define drag constant
-        this.DRAG_MULTI = 0.97;
+        this.DRAG_MULTI = 0.96;
 
         // add object to existing scene
         scene.add.existing(this);
@@ -62,13 +62,17 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
                 this.scene.time.delayedCall(this.DASH_COOLDOWN, ()=>{this.canDash = true}, [], this);
                 if(keyLEFT.isDown) {
                     this.body.setVelocityX(-this.DASH_VELOCITY);
+                    thruster.play();
                 } else if (keyRIGHT.isDown) {
                     this.body.setVelocityX(this.DASH_VELOCITY);
+                    thruster.play();
                 }
                 if(keyUP.isDown) {
                     this.body.setVelocityY(-this.DASH_VELOCITY);
+                    thruster.play();
                 } else if(keyDOWN.isDown) {
                     this.body.setVelocityY(this.DASH_VELOCITY);
+                    thruster.play();
                 }
             }
         }

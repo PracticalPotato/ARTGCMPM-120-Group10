@@ -21,6 +21,5 @@ class Alien extends Phaser.Physics.Arcade.Sprite{
     update() {
 
     }
-
-        
+   
 }

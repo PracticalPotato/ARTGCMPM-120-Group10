@@ -6,7 +6,7 @@ let config = {
     width: 480,
     height: 640,
     scale: {
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        //autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics: {
         default: 'arcade',
@@ -31,6 +31,8 @@ let keyENTER, keySPACE, keyLEFT, keyRIGHT, keyUP, keyDOWN, keyR, keyM;
 let highScore = 0;
 let currentScore = 0;
 let newHighScore = false;
+// thruster sound
+let thruster;
 
 game.settings = {
     
