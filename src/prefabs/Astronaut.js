@@ -7,7 +7,7 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // this.MOVESPEED = 10;
 
         // define acceleration
-        this.ACCELERATION = 600;
+        this.ACCELERATION = 350;
         
         // define drag constant
         this.DRAG_MULTI = 0.97;
@@ -30,7 +30,7 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // dash settings
         this.canDash = true;
         this.DASH_COOLDOWN = 500;
-        this.DASH_VELOCITY = 500;
+        this.DASH_VELOCITY = 350;
     }
 
     update() {

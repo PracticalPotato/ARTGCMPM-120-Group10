@@ -8,8 +8,9 @@ class Play extends Phaser.Scene{
         this.break = this.sound.add('sfx_break', {volume: 0.1});
         this.pickups = this.sound.add('sfx_pickups', {volume: 0.15});
         this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.15});
+        this.powerUp = this.sound.add('sfx_powerUp', {volume: 0.15});
         // add music
-        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.1});
+        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.15});
         this.bgMusic.loop = true;
         this.bgMusic.play();
 
@@ -146,9 +147,9 @@ class Play extends Phaser.Scene{
         }
     }
 
-    // powerUp spawn loop
+    // powerUp spawn loop (Phaser Notes Source)
     powerUpSpawn() {
-        // Add asteroid
+        // add power ip
         var powerUp = new PowerUp(this, this.pickupVELOCITY 
             * (Math.random() * (1.3 - 1) + 1)).setScale(1, 1);
         // blink
@@ -167,7 +168,7 @@ class Play extends Phaser.Scene{
 
         this.powerUpGroup.add(powerUp);
         // Call powerUpSpawn on a random delay
-        let delay = (Phaser.Math.Between(5000,5500)) * (this.fasterDelay);
+        let delay = (Phaser.Math.Between(5500,6000)) * (this.fasterDelay);
         var timer = this.time.delayedCall(delay, this.powerUpSpawn, [], this);       
     }
 
@@ -202,7 +203,7 @@ class Play extends Phaser.Scene{
         this.pickup.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup.add(this.pickup);
         // Call pickupSpawn on a random delay
-        let delay = (Phaser.Math.Between(2000,3000));
+        let delay = (Phaser.Math.Between(1500,2000));
         var timer = this.time.delayedCall(delay, this.pickupSpawn, [], this);    
     }
     pickupSpawn2() {
@@ -212,13 +213,13 @@ class Play extends Phaser.Scene{
         this.pickup2.rotation += Math.random() * 360;   // pickup rotation
         this.pickupGroup2.add(this.pickup2);
         // Call pickupSpawn on a random delay
-        let delay = (Phaser.Math.Between(2000,3000));
+        let delay = (Phaser.Math.Between(1500,2000));
         var timer = this.time.delayedCall(delay, this.pickupSpawn2, [], this);    
     }
 
     // astronaut death
     astronautDeath(astronaut, asteroid){
-        this.cameras.main.shake(1000, 0.1); 
+        this.cameras.main.shake(1000, 0.05); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
@@ -233,8 +234,9 @@ class Play extends Phaser.Scene{
 
     // powerUp death
     powerUpDeath(astronaut, powerup){
-        this.pickups.play();
+        this.powerUp.play();
         powerup.destroy();
+        astronaut.ACCELERATION += 50;
     }
 
     // pickup death
@@ -271,6 +273,7 @@ class Play extends Phaser.Scene{
         // pickup rotation
         this.pickupGroup.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
         this.pickupGroup2.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
+
 
     }
     

@@ -25,6 +25,7 @@ class Load extends Phaser.Scene{
         this.load.image('alien', './assets/alien2.png');
         this.load.audio('sfx_break', './assets/audio/Break.wav');
         this.load.audio('sfx_select', './assets/audio/Select.wav');
+        this.load.audio('sfx_powerUp', './assets/audio/powerUp.wav');
         this.load.audio('sfx_pickups', './assets/audio/Pickup.wav');
         this.load.audio('sfx_pickups2', './assets/audio/Pickup2.wav');
         this.load.audio('sfx_2NROBOT', './assets/audio/2NROBOT.mp3');
