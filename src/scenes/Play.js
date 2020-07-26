@@ -16,7 +16,7 @@ class Play extends Phaser.Scene{
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 155;
+        this.asteroidVELOCITY = 150;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 140;
         
@@ -61,14 +61,14 @@ class Play extends Phaser.Scene{
         this.livesText = this.add.sprite(65, 30, 'lives')
             .setScale(0.5).setOrigin(0.5);
         // image lives shake: source: notes of phaser 3 
-        /*this.tweens.add({
+        this.tweens.add({
             targets: this.livesText,
-            y: { from: 617, to: 622 },
+            y: { from: 26, to: 30 },
             ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
             duration: 500,
             repeat: -1,            // -1: infinity
             yoyo: false
-        });*/
+        });
         this.scoreConfig.color = 'red';
         this.livesNumber = this.add.text(117, 9, this.lives, this.scoreConfig);
 
@@ -239,7 +239,10 @@ class Play extends Phaser.Scene{
         if(this.lives <= 0){
             this.gameOver = true;
             this.p1Astronaut.destroy();
-            this.scene.start('gameOverScene');
+            this.cameras.main.fadeOut(2000, 0, 0, 0)
+            this.time.delayedCall(2000, () => {
+                this.scene.start('gameOverScene');
+            })
             this.bgMusic.stop();
         }
     }

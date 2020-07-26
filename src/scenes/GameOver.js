@@ -4,6 +4,8 @@ class GameOver extends Phaser.Scene{
     }
 
     create(){
+        this.cameras.main.fadeIn(1500, 0, 0, 0)
+
         // add background starfield
         this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
 
@@ -51,12 +53,12 @@ class GameOver extends Phaser.Scene{
             fixedWidth: 0
         }
         // high score & current score
-        this.add.sprite(95, 453, 'score')
+        this.add.sprite(105, 453, 'score')
             .setScale(0.5);
-        this.add.text(145, 430, currentScore, this.scoreConfig);
-        this.add.sprite(300, 453, 'highScore')
+        this.add.text(155, 430, currentScore, this.scoreConfig);
+        this.add.sprite(315, 453, 'highScore')
             .setScale(0.5);
-        this.add.text(390, 430, highScore, this.scoreConfig);
+        this.add.text(405, 430, highScore, this.scoreConfig);
     }
 
     update(){
