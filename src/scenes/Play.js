@@ -11,7 +11,7 @@ class Play extends Phaser.Scene{
         this.powerUp = this.sound.add('sfx_powerUp', {volume: 0.15});
 
         // add music
-        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.17});
+        this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.18});
         this.bgMusic.loop = true;
         this.bgMusic.play();
 
@@ -239,8 +239,8 @@ class Play extends Phaser.Scene{
         if(this.lives <= 0){
             this.gameOver = true;
             this.p1Astronaut.destroy();
-            this.cameras.main.fadeOut(2000, 0, 0, 0)
-            this.time.delayedCall(2000, () => {
+            this.cameras.main.fadeOut(1700, 0, 0, 0)
+            this.time.delayedCall(1700, () => {
                 this.scene.start('gameOverScene');
             })
             this.bgMusic.stop();
