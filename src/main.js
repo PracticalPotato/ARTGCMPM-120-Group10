@@ -6,7 +6,7 @@ let config = {
     width: 480,
     height: 640,
     scale: {
-        //autoCenter: Phaser.Scale.CENTER_BOTH
+        autoCenter: Phaser.Scale.CENTER_BOTH
     },
     physics: {
         default: 'arcade',
