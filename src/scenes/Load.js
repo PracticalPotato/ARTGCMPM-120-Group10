@@ -12,7 +12,10 @@ class Load extends Phaser.Scene{
         this.load.image('enterStart', './assets/EnterStart.png');
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('starfield2', './assets/starfield2.png');
-        this.load.image('astronaut', './assets/Astronaut.png');
+        this.load.spritesheet('astronaut', './assets/AstronautSheet.png', {
+            frameWidth: 34, 
+            frameHeight: 52,
+        });
         this.load.image('asteroid1', './assets/Asteroid1.png');
         this.load.image('asteroid2', './assets/Asteroid2.png');
         this.load.image('asteroid3', './assets/Asteroid3.png');

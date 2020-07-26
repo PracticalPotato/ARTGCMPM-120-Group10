@@ -7,7 +7,10 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // this.MOVESPEED = 10;
 
         // define acceleration
-        this.ACCELERATION = 1500;
+        this.ACCELERATION = 600;
+        
+        // define drag constant
+        this.DRAG_MULTI = 0.97;
 
         // // define constants (explosive physics movement)
         // this.EXPLOSION_VELOCITY = 2000;
@@ -24,9 +27,10 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         //this.setMaxVelocity(this.MAX_VELOCITY);
         this.body.setSize(this.displayWidth*0.9, this.displayHeight*0.9)
 
-        // dash flags
+        // dash settings
         this.canDash = true;
         this.DASH_COOLDOWN = 500;
+        this.DASH_VELOCITY = 500;
     }
 
     update() {
@@ -43,6 +47,17 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // if(keyDOWN.isDown && this.y <= 427) {
         //     this.y += this.MOVESPEED;
         // }
+
+        // set sprite and invuln state based on movement
+        if (this.body.velocity.x > 50) {
+            this.setFrame(1);
+            this.setFlipX(false);
+        } else if (this.body.velocity.x < -50) {
+            this.setFrame(1);
+            this.setFlipX(true);
+        } else {
+            this.setFrame(0);
+        }
 
         // physics-based normal movement
         if(keyLEFT.isDown) {
@@ -62,22 +77,23 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         }
 
         // Dashing
-        // if (Phaser.Input.Keyboard.JustDown(keySPACE) && this.canDash) {
-        //     if(keyLEFT.isDown || keyRIGHT.isDown || keyUP.isDown || keyDOWN.isDown) {
-        //         this.canDash = false;
-        //         this.time.delayedCall(this.DASH_COOLDOWN, ()=>{this.canDash = true}, [], this);
-        //         if(keyLEFT.isDown) {
-        //             this.body.setVelocityX(-800);
-        //         } else if (keyRIGHT.isDown) {
-        //             this.body.setVelocityX(800);
-        //         }
-        //         if(keyUP.isDown) {
-        //             this.body.setVelocityY(-800);
-        //         } else if(keyDOWN.isDown) {
-        //             this.body.setVelocityY(800);
-        //         }
-        //     }
-        // }
+        if (keySPACE.isDown && this.canDash) {
+            console.log("spacebar detected");
+            if(keyLEFT.isDown || keyRIGHT.isDown || keyUP.isDown || keyDOWN.isDown) {
+                this.canDash = false;
+                this.scene.time.delayedCall(this.DASH_COOLDOWN, ()=>{this.canDash = true}, [], this);
+                if(keyLEFT.isDown) {
+                    this.body.setVelocityX(-this.DASH_VELOCITY);
+                } else if (keyRIGHT.isDown) {
+                    this.body.setVelocityX(this.DASH_VELOCITY);
+                }
+                if(keyUP.isDown) {
+                    this.body.setVelocityY(-this.DASH_VELOCITY);
+                } else if(keyDOWN.isDown) {
+                    this.body.setVelocityY(this.DASH_VELOCITY);
+                }
+            }
+        }
 
         // // self-implemented maxvelocity
         // if (this.body.velocity.x > this.MAX_VELOCITY) {
@@ -91,7 +107,7 @@ class Astronaut extends Phaser.Physics.Arcade.Sprite{
         // }
 
         // self-implemented drag
-        this.setVelocity(this.body.velocity.x*0.9, this.body.velocity.y*0.9);
+        this.setVelocity(this.body.velocity.x*this.DRAG_MULTI, this.body.velocity.y*this.DRAG_MULTI);
 
         // physics-based explosive movement (EXPERIMENTAL)
         // if(Phaser.Input.Keyboard.JustDown(keyLEFT)) {

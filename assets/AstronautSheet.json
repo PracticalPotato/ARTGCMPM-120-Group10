@@ -1,0 +1,62 @@
+{
+	"textures": [
+		{
+			"image": "AstronautSheet.png.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 68,
+				"h": 52
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "Astronaut.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 50
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 32,
+						"h": 50
+					}
+				},
+				{
+					"filename": "astronautSide.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 32,
+						"h": 50
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 32,
+						"h": 50
+					},
+					"frame": {
+						"x": 35,
+						"y": 1,
+						"w": 32,
+						"h": 50
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:e121b5f581e9cc47f3d85b2cab8b2007:b2b9dcf41a05db0113e514cd63b2e8ac:c197e817f557b32b2eead0deffb0b588$"
+	}
+}
