@@ -5,6 +5,9 @@ class Load extends Phaser.Scene{
 
     preload() {
         // Load image assets
+        this.load.image('speed', './assets/speed.png');
+        this.load.image('score', './assets/score.png');
+        this.load.image('highScore', './assets/highScore.png');
         this.load.image('tutorial', './assets/tutorial.png');
         this.load.image('arrowKeys', './assets/ArrowKeys.png');
         this.load.image('powerUp', './assets/powerUp.png');

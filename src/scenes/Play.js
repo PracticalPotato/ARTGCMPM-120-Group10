@@ -16,7 +16,7 @@ class Play extends Phaser.Scene{
         this.bgMusic.play();
 
         // define constants
-        this.asteroidVELOCITY = 160;
+        this.asteroidVELOCITY = 155;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 140;
         
@@ -47,28 +47,37 @@ class Play extends Phaser.Scene{
         }
         // current score
         currentScore = 0;
-        this.add.text(20, 15, 'Score:', this.scoreConfig);
-        this.currentScoreT = this.add.text(95, 15, currentScore, this.scoreConfig);
+        this.add.sprite(360, 32, 'score')
+            .setScale(0.6);
+        this.currentScoreT = this.add.text(418, 9, currentScore, this.scoreConfig);
 
         // high score
-        this.add.text(280, 16, 'High Score:', this.scoreConfig);
-        this.highScoreT = this.add.text(410, 16, highScore, this.scoreConfig);
+        this.add.sprite(332, 619, 'highScore')
+            .setScale(0.5);
+        this.highScoreT = this.add.text(419, 596, highScore, this.scoreConfig);
 
         // lives display
         this.lives = 3;
-        this.livesText = this.add.sprite(200, 615, 'lives')
-            .setScale(0.55).setOrigin(0.5);
+        this.livesText = this.add.sprite(65, 30, 'lives')
+            .setScale(0.5).setOrigin(0.5);
         // image lives shake: source: notes of phaser 3 
-        this.tweens.add({
+        /*this.tweens.add({
             targets: this.livesText,
             y: { from: 617, to: 622 },
             ease: 'Back',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
             duration: 500,
             repeat: -1,            // -1: infinity
             yoyo: false
-        });
+        });*/
         this.scoreConfig.color = 'red';
-        this.livesNumber = this.add.text(260, 600, this.lives, this.scoreConfig);
+        this.livesNumber = this.add.text(117, 9, this.lives, this.scoreConfig);
+
+        // speed display
+        this.scoreConfig.color = 'white';
+        this.add.sprite(53, 619, 'speed')
+            .setScale(0.5);
+        this.scoreConfig.fontSize = '25px';
+        this.speedT = this.add.text(98, 598, '', this.scoreConfig);
 
         // add astronaut (p1)
         this.p1Astronaut = new Astronaut(this, game.config.width/2, 431, 'astronaut', 0);
@@ -239,7 +248,8 @@ class Play extends Phaser.Scene{
     powerUpGet(astronaut, powerup){
         this.powerUp.play();
         powerup.destroy();
-        astronaut.ACCELERATION += 30;
+        astronaut.ACCELERATION += 25;
+        this.speedT.text += 'I';
     }
 
     // pickup death

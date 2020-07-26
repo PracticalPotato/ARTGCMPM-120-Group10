@@ -52,10 +52,12 @@ class Menu extends Phaser.Scene{
         this.add.text(87, 615, "@copyright John Payne & Calvin Rong 2020");
 
         // high score & current score
-        this.add.text(70, 475, 'Score:', scoreConfig);
-        this.add.text(145, 475, currentScore, scoreConfig);
-        this.add.text(235, 475, 'High Score:', scoreConfig);
-        this.add.text(365, 475, highScore, scoreConfig);
+        this.add.sprite(90, 498, 'score')
+            .setScale(0.5);
+        this.add.text(140, 475, currentScore, scoreConfig);
+        this.add.sprite(305, 497, 'highScore')
+            .setScale(0.5);
+        this.add.text(395, 474, highScore, scoreConfig);
 
         // define keys
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
