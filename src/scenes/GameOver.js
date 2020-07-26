@@ -50,9 +50,11 @@ class GameOver extends Phaser.Scene{
             },
             fixedWidth: 0
         }
-        // high score
-        this.add.text(151, 430, 'High Score:', this.scoreConfig);
-        this.add.text(282, 431, highScore, this.scoreConfig);
+        // high score & current score
+        this.add.text(70, 430, 'Score:', this.scoreConfig);
+        this.add.text(145, 430, currentScore, this.scoreConfig);
+        this.add.text(235, 430, 'High Score:', this.scoreConfig);
+        this.add.text(365, 430, highScore, this.scoreConfig);
     }
 
     update(){

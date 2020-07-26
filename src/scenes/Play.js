@@ -45,13 +45,14 @@ class Play extends Phaser.Scene{
             },
             fixedWidth: 0
         }
+        // current score
         currentScore = 0;
         this.add.text(20, 15, 'Score:', this.scoreConfig);
-        this.currentScoreT = this.add.text(100, 16.5, currentScore, this.scoreConfig);
+        this.currentScoreT = this.add.text(95, 15, currentScore, this.scoreConfig);
 
         // high score
         this.add.text(280, 16, 'High Score:', this.scoreConfig);
-        this.highScoreT = this.add.text(415, 17.5, highScore, this.scoreConfig);
+        this.highScoreT = this.add.text(410, 16, highScore, this.scoreConfig);
 
         // lives display
         this.lives = 3;
@@ -182,7 +183,7 @@ class Play extends Phaser.Scene{
         asteroid.rotation += Math.random() * 360;   // asteroid rotation
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
-        let delay = (Phaser.Math.Between(700,1400)) * (this.fasterDelay);
+        let delay = (Phaser.Math.Between(900,1500)) * (this.fasterDelay);
         var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);       
     }
 

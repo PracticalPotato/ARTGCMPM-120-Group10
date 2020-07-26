@@ -42,7 +42,7 @@ class Menu extends Phaser.Scene{
             // alpha: 1,
             // alpha: '+=1',
             ease: 'Bounce',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
-            duration: 2500,
+            duration: 2000,
             repeat: -1,            // -1: infinity
             yoyo: false
         });
@@ -51,9 +51,11 @@ class Menu extends Phaser.Scene{
         this.add.text(20, 20, "Mission Impossible Menu");
         this.add.text(87, 615, "@copyright John Payne & Calvin Rong 2020");
 
-        // high score
-        this.add.text(150, 480, 'High Score:', scoreConfig);
-        this.add.text(285, 481, highScore, scoreConfig);
+        // high score & current score
+        this.add.text(70, 475, 'Score:', scoreConfig);
+        this.add.text(145, 475, currentScore, scoreConfig);
+        this.add.text(235, 475, 'High Score:', scoreConfig);
+        this.add.text(365, 475, highScore, scoreConfig);
 
         // define keys
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);

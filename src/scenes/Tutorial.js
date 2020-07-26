@@ -78,13 +78,9 @@ class Tutorial extends Phaser.Scene{
         // image enter shake: source: notes of phaser 3 
         this.tweens.add({
             targets: this.enter,
-            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
             alpha: { from: 0, to: 1 },
-            // alpha: { start: 0, to: 1 },
-            // alpha: 1,
-            // alpha: '+=1',
             ease: 'Bounce',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
-            duration: 2500,
+            duration: 1000,
             repeat: -1,            // -1: infinity
             yoyo: false
         });
