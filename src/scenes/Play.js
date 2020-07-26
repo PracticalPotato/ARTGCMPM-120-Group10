@@ -8,7 +8,7 @@ class Play extends Phaser.Scene{
         this.break = this.sound.add('sfx_break', {volume: 0.1});
         this.pickups = this.sound.add('sfx_pickups', {volume: 0.15});
         this.pickups2 = this.sound.add('sfx_pickups2', {volume: 0.15});
-        
+
         // add music
         this.bgMusic = this.sound.add('sfx_2NROBOT', {volume: 0.1});
         this.bgMusic.loop = true;
@@ -43,10 +43,10 @@ class Play extends Phaser.Scene{
                 bottom: 5,
             },
             fixedWidth: 0
-        } 
-        this.score = 0;
+        }
+        currentScore = 0;
         this.add.text(20, 15, 'Score:', this.scoreConfig);
-        this.scoreT = this.add.text(100, 16.5, this.score, this.scoreConfig);
+        this.currentScoreT = this.add.text(100, 16.5, currentScore, this.scoreConfig);
 
         // high score
         this.add.text(280, 16, 'High Score:', this.scoreConfig);
@@ -220,7 +220,7 @@ class Play extends Phaser.Scene{
 
     // astronaut death
     astronautHit(astronaut, asteroid){
-        this.cameras.main.shake(1000, 0.1); 
+        this.cameras.main.shake(300, 0.03); 
         this.lives --;
         this.livesNumber.text = this.lives;
         this.break.play();
@@ -243,21 +243,21 @@ class Play extends Phaser.Scene{
     pickupGet(astronaut, pickup){
         this.pickups.play();
         pickup.destroy();
-        this.score += 10;
-        this.scoreT.text = this.score;
-        if(highScore < this.score){
-            highScore = this.score;
-            this.highScoreT.text= this.score;
+        currentScore += 10;
+        this.currentScoreT.text = currentScore;
+        if(highScore < currentScore){
+            highScore = currentScore;
+            this.highScoreT.text= currentScore;
         }
     }
     pickupGet2(astronaut, pickup2){
         this.pickups2.play();
         pickup2.destroy();
-        this.score += 10;
-        this.scoreT.text = this.score;
-        if(highScore < this.score){
-            highScore = this.score;
-            this.highScoreT.text= this.score;
+        currentScore += 10;
+        this.currentScoreT.text = currentScore;
+        if(highScore < currentScore){
+            highScore = currentScore;
+            this.highScoreT.text= currentScore;
         }
     }
 
