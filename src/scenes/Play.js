@@ -155,6 +155,19 @@ class Play extends Phaser.Scene{
                 this.asteroidVELOCITY += 12.5;
                 this.fasterDelay *= 0.93;
                 this.starfieldSpeed += 0.3;
+                this.difficultyT = this.add.text(game.config.width/2-150, game.config.height*2/5,
+                    "Difficulty Up!", this.scoreConfig).setOrigin(0, 0);
+                    this.tweens.add({
+                        targets: this.difficultyT,
+                        x: { from: game.config.width/2-150, to: game.config.width/2-50 },
+                        ease: 'Cubic',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
+                        duration: 500,
+                        repeat: 0,            // -1: infinity
+                        yoyo: false
+                    });
+                this.time.delayedCall(1000, () => {
+                    this.difficultyT.destroy();
+                }, [], this);
             }
         }
     }
