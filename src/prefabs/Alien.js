@@ -14,7 +14,8 @@ class Alien extends Phaser.Physics.Arcade.Sprite{
 
         this.velocityX = Phaser.Math.Between(-20, 20)
         this.setVelocityX(this.velocityX);
-        //this.body.setCircle(this.displayHeight/2);
+        
+        this.body.setSize(this.displayWidth*0.9, this.displayHeight*0.9)
 
     }
 
