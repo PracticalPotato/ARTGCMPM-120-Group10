@@ -19,6 +19,7 @@ class Play extends Phaser.Scene{
         this.asteroidVELOCITY = 150;
         this.fasterDelay = 1;
         this.pickupVELOCITY = 100;
+        this.levelNumber = 0;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -147,7 +148,7 @@ class Play extends Phaser.Scene{
             callback: onEvent, 
             callbackScope: this, 
             //loop: true,
-            repeat: 12, 
+            repeat: 13, 
         });
         function onEvent ()
         {
@@ -155,17 +156,18 @@ class Play extends Phaser.Scene{
                 this.asteroidVELOCITY += 12.5;
                 this.fasterDelay *= 0.93;
                 this.starfieldSpeed += 0.3;
-                this.difficultyT = this.add.text(game.config.width/2-150, game.config.height*2/5,
-                    "Difficulty Up!", this.scoreConfig).setOrigin(0, 0);
+                this.levelNumber += 1;
+                this.difficultyT = this.add.text(game.config.width/2-125, game.config.height*2/5,
+                    "Level  " + this.levelNumber, this.scoreConfig).setOrigin(0, 0);
                     this.tweens.add({
                         targets: this.difficultyT,
-                        x: { from: game.config.width/2-150, to: game.config.width/2-50 },
+                        x: { from: game.config.width/2-125, to: game.config.width/2-25 },
                         ease: 'Cubic',       // 'Cubic', 'Elastic', 'Bounce', 'Back', 'Linear'
                         duration: 500,
                         repeat: 0,            // -1: infinity
                         yoyo: false
                     });
-                this.time.delayedCall(1200, () => {
+                this.time.delayedCall(1250, () => {
                     this.difficultyT.destroy();
                 }, [], this);
             }
