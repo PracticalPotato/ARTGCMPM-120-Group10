@@ -18,7 +18,7 @@ class Play extends Phaser.Scene{
         // define constants
         this.asteroidVELOCITY = 150;
         this.fasterDelay = 1;
-        this.pickupVELOCITY = 140;
+        this.pickupVELOCITY = 100;
         
         // define keys, declared in main.js
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -124,7 +124,7 @@ class Play extends Phaser.Scene{
 
         // start pickup spawn loop
         this.pickupSpawn();
-        this.pickupSpawn2();
+        // this.pickupSpawn2();
 
         // game over flag
         this.gameOver = false;
