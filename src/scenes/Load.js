@@ -27,6 +27,7 @@ class Load extends Phaser.Scene{
         this.load.image('asteroid3', './assets/Asteroid3.png');
         this.load.image('pickup', './assets/PickUp.png');
         this.load.image('alien', './assets/alien2.png');
+        // Load audio assets
         this.load.audio('sfx_thruster', './assets/audio/Thruster.wav');
         this.load.audio('sfx_break', './assets/audio/Break.wav');
         this.load.audio('sfx_select', './assets/audio/Select.wav');
@@ -37,7 +38,9 @@ class Load extends Phaser.Scene{
     }
 
     create(){
+        // add global sound thruster for arcade physics object Astronaut
         thruster = this.sound.add('sfx_thruster', {volume: 0.35});
+        // start menu scene
         this.scene.start('menuScene');
     }
 }

@@ -22,12 +22,11 @@ class GameOver extends Phaser.Scene{
         let textSpacer = 64;
         this.add.sprite(centerX, centerY - textSpacer, 'gameOver')
             .setScale(1).setOrigin(0.5);
-        this.choice = this.add.sprite(centerX, centerY - textSpacer + 100 , 'restart')
+        this.restart = this.add.sprite(centerX, centerY - textSpacer + 100 , 'restart')
             .setScale(0.65).setOrigin(0.5);
         // image enter shake: source: notes of phaser 3 
         this.tweens.add({
-            targets: this.choice,
-            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
+            targets: this.restart,
             alpha: { from: 0, to: 1 },
             // alpha: { start: 0, to: 1 },
             // alpha: 1,
@@ -72,5 +71,4 @@ class GameOver extends Phaser.Scene{
             this.scene.start("menuScene");    
         } 
     }
-
 }

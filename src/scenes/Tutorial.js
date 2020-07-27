@@ -4,7 +4,7 @@ class Tutorial extends Phaser.Scene{
     }
 
     create(){
-        // add sound volume
+        // add key enter sound volume
         this.select = this.sound.add('sfx_select', {volume: 0.4});
 
         // text confic
@@ -34,7 +34,7 @@ class Tutorial extends Phaser.Scene{
         this.starfield = this.add.tileSprite(0, 0, 480, 640, 'starfield').setOrigin(0, 0);
         
         this.arrowKeys = this.add.sprite(75, 115, 'arrowKeys').setScale(0.9).setOrigin(0.5);
-        // lives shake: source: notes of phaser 3 
+        // arrowKeys image shake: source: notes of phaser 3 
         this.tweens.add({
             targets: this.arrowKeys,
             y: { from: 119, to: 112 },
@@ -89,7 +89,7 @@ class Tutorial extends Phaser.Scene{
         this.alienMove = true;
 
         // astronaut dash boolean
-        this.astronautMove = true;
+        this.astronautDash = true;
 
         // define keys
         keyENTER = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
@@ -136,17 +136,17 @@ class Tutorial extends Phaser.Scene{
         }
 
         // astronaut2 dash // center: 325, 517
-        if(this.astronautMove == true){
+        if(this.astronautDash == true){
             this.astronaut2.x += 8;
         }
         if(this.astronaut2.x >= 400){
-            this.astronautMove = false;
+            this.astronautDash = false;
         }
-        if(this.astronautMove == false){
+        if(this.astronautDash == false){
             this.astronaut2.x -= 1;
         }
         if(this.astronaut2.x <= 325){
-            this.astronautMove = true;
+            this.astronautDash = true;
         }
     }
 }

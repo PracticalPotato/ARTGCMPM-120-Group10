@@ -165,7 +165,7 @@ class Play extends Phaser.Scene{
                         repeat: 0,            // -1: infinity
                         yoyo: false
                     });
-                this.time.delayedCall(1000, () => {
+                this.time.delayedCall(1200, () => {
                     this.difficultyT.destroy();
                 }, [], this);
             }
@@ -180,7 +180,6 @@ class Play extends Phaser.Scene{
         // powerup blink
         this.tweens.add({
             targets: powerUp,
-            //y: { from: centerY - textSpacer + 100, to: centerY - textSpacer + 105 },
             alpha: { from: 0, to: 0.9 },
             // alpha: { start: 0, to: 1 },
             // alpha: 1,
@@ -244,7 +243,7 @@ class Play extends Phaser.Scene{
         this.time.delayedCall(delay, this.pickupSpawn2, [], this);    
     }
 
-    // astronaut death
+    // astronaut hit
     astronautHit(astronaut, asteroid){
         this.cameras.main.shake(600, 0.04); 
         this.lives --;
@@ -264,7 +263,7 @@ class Play extends Phaser.Scene{
         }
     }
 
-    // powerUp death
+    // powerUp get
     powerUpGet(astronaut, powerup){
         this.powerUp.play();
         powerup.destroy();
@@ -274,7 +273,7 @@ class Play extends Phaser.Scene{
         }
     }
 
-    // pickup death
+    // pickup get
     pickupGet(astronaut, pickup){
         this.pickups.play();
         pickup.destroy();
@@ -308,7 +307,5 @@ class Play extends Phaser.Scene{
         // pickup rotation
         this.pickupGroup.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
         this.pickupGroup2.rotate(Math.random() * (-0.027 - -0.006) + -0.006);
-
     }
-    
 }
