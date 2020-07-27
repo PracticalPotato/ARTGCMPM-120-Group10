@@ -181,7 +181,7 @@ class Play extends Phaser.Scene{
         this.powerUpGroup.add(powerUp);
         // Call powerUpSpawn on a random delay
         let delay = (Phaser.Math.Between(6000,6500));
-        if (astronaut.ACCELERATION < 500) {
+        if (this.p1Astronaut.ACCELERATION < 500) {
             this.time.delayedCall(delay, this.powerUpSpawn, [], this);
         }      
     }
