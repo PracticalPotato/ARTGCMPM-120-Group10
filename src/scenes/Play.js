@@ -181,7 +181,9 @@ class Play extends Phaser.Scene{
         this.powerUpGroup.add(powerUp);
         // Call powerUpSpawn on a random delay
         let delay = (Phaser.Math.Between(6000,6500));
-        var timer = this.time.delayedCall(delay, this.powerUpSpawn, [], this);       
+        if (astronaut.ACCELERATION < 500) {
+            this.time.delayedCall(delay, this.powerUpSpawn, [], this);
+        }      
     }
 
     // asteroid spawn loop
@@ -193,7 +195,7 @@ class Play extends Phaser.Scene{
         this.asteroidGroup.add(asteroid);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(900,1500)) * (this.fasterDelay);
-        var timer = this.time.delayedCall(delay, this.asteroidSpawn, [], this);       
+        this.time.delayedCall(delay, this.asteroidSpawn, [], this);       
     }
 
     // alien spawn loop
@@ -204,7 +206,7 @@ class Play extends Phaser.Scene{
         this.alienGroup.add(alien);
         // Call asteroidSpawn on a random delay
         let delay = (Phaser.Math.Between(3500,4000)) * (this.fasterDelay);
-        var timer = this.time.delayedCall(delay, this.alienSpawn, [], this);
+        this.time.delayedCall(delay, this.alienSpawn, [], this);
     }
 
     // pickup spawn loop
@@ -216,7 +218,7 @@ class Play extends Phaser.Scene{
         this.pickupGroup.add(this.pickup);
         // Call pickupSpawn on a random delay
         let delay = (Phaser.Math.Between(1500,2000));
-        var timer = this.time.delayedCall(delay, this.pickupSpawn, [], this);    
+        this.time.delayedCall(delay, this.pickupSpawn, [], this);    
     }
     pickupSpawn2() {
         // Add pickup2
@@ -226,7 +228,7 @@ class Play extends Phaser.Scene{
         this.pickupGroup2.add(this.pickup2);
         // Call pickupSpawn on a random delay
         let delay = (Phaser.Math.Between(1500,2000));
-        var timer = this.time.delayedCall(delay, this.pickupSpawn2, [], this);    
+        this.time.delayedCall(delay, this.pickupSpawn2, [], this);    
     }
 
     // astronaut death
@@ -238,9 +240,11 @@ class Play extends Phaser.Scene{
         asteroid.destroy();
         if(this.lives <= 0){
             this.gameOver = true;
-            this.p1Astronaut.destroy();
-            this.cameras.main.fadeOut(1700, 0, 0, 0)
-            this.time.delayedCall(1700, () => {
+            this.time.delayedCall(500, () => {
+                this.cameras.main.fadeOut(1500, 0, 0, 0)
+            })
+            this.time.delayedCall(2000, () => {
+                this.p1Astronaut.destroy();
                 this.scene.start('gameOverScene');
             })
             this.bgMusic.stop();
@@ -251,8 +255,10 @@ class Play extends Phaser.Scene{
     powerUpGet(astronaut, powerup){
         this.powerUp.play();
         powerup.destroy();
-        astronaut.ACCELERATION += 25;
-        this.speedT.text += 'I';
+        if (astronaut.ACCELERATION < 500) {
+            astronaut.ACCELERATION += 25;
+            this.speedT.text += 'I';
+        }
     }
 
     // pickup death
